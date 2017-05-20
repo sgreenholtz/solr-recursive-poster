@@ -1,7 +1,15 @@
 package solr.posters;
 
 
+import solr.util.ConsoleLogger;
+import solr.walker.Walker;
+
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 /**
  * Posts to Solr recursively through directories
  * @author greensxayu
@@ -13,11 +21,15 @@ public class DirectoryPoster {
 		return pathToTest.isDirectory();
 	}
 	
-	public static int postFilesInDirectories(String path) {
+	public static int postFilesInDirectories(String pathStr) {
 		int fileCount = 0;
-		
-		
-		//TODO: finish
+		Path path = Paths.get(pathStr);
+		try {
+			Files.walkFileTree(path, new Walker());
+		} catch (IOException e) {
+			ConsoleLogger.fatal("Read/Write error while taversing file system", e);
+		}
 		return fileCount;
+
 	}
 }

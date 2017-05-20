@@ -22,4 +22,20 @@ public class ConsoleLogger {
 	    System.err.println("SimplePostTool: FATAL: " + msg);
 	    System.exit(1);
 	  }
+
+	  public static void fatal(String msg, Exception e) {
+          System.err.println("SimplePostTool: FATAL: " + msg);
+          System.err.println(getFormatedStackTrace(e.getStackTrace()));
+          System.exit(1);
+	  }
+
+	  private static String getFormatedStackTrace(StackTraceElement[] st) {
+	      StringBuilder sb = new StringBuilder();
+	      String newLine = System.lineSeparator();
+	      for (StackTraceElement stackTraceElement : st) {
+	          sb.append(stackTraceElement);
+	          sb.append(newLine);
+          }
+          return sb.toString();
+      }
 }
