@@ -13,11 +13,11 @@ import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 
-public class FilePoster {
+public class FilePoster extends Poster {
 	private static final String SOLR_OK_RESPONSE_EXCERPT = "<int name=\"status\">0</int>";
 	public static final String POST_ENCODING = "UTF-8";
 
-	public static void postFiles(String path) throws Exception{
+	public static void postFiles(String path) throws Exception {
 		File srcFile = new File(path);
 	      final StringWriter sw = new StringWriter();
 	      
