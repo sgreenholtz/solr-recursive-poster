@@ -93,7 +93,7 @@ public class SimplePostTool {
       if (DATA_MODE_FILES.equals(mode)) {
         if (0 < args.length) {
           ConsoleLogger.info("POSTing files to " + u + "..");
-          final int posted = t.postFiles(args,0);
+          t.postFiles(args,0);
         }
         
       } else if (DATA_MODE_ARGS.equals(mode)) {
