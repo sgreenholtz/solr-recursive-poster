@@ -14,7 +14,7 @@ import java.nio.file.Paths;
  * Posts to Solr recursively through directories
  * @author greensxayu
  */
-public class DirectoryPoster extends Poster {
+public class DirectoryPoster implements Poster {
 
 	private static Poster poster = new FilePoster();
 	
@@ -23,7 +23,7 @@ public class DirectoryPoster extends Poster {
 		return pathToTest.isDirectory();
 	}
 	
-	public static int postFilesInDirectories(String pathStr) {
+	public void postFiles(String pathStr) {
 		int fileCount = 0;
 		Path path = Paths.get(pathStr);
 		try {
@@ -31,7 +31,6 @@ public class DirectoryPoster extends Poster {
 		} catch (IOException e) {
 			ConsoleLogger.fatal("Read/Write error while taversing file system", e);
 		}
-		return fileCount;
 
 	}
 }
