@@ -17,6 +17,11 @@ package solr;
  * limitations under the License.
  */
 
+import solr.posters.DataPoster;
+import solr.posters.DirectoryPoster;
+import solr.posters.FilePoster;
+import solr.util.ConsoleLogger;
+
 import java.io.*;
 import java.util.Set;
 import java.util.HashSet;

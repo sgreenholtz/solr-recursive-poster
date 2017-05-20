@@ -1,4 +1,7 @@
-package solr;
+package solr.posters;
+
+import solr.util.ConsoleLogger;
+import solr.util.PostException;
 
 import java.io.File;
 import java.io.FileInputStream;

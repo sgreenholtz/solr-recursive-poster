@@ -1,4 +1,4 @@
-package solr;
+package solr.posters;
 
 
 import java.io.File;
