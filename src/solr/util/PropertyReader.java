@@ -14,39 +14,40 @@ import java.util.*;
  */
 public class PropertyReader {
 
-    private final String propertyFilePath = "post.properties";
-    private Properties properties;
-    private static PropertyReader instance;
+    private final static String propertyFilePath = "post.properties";
+    private static Properties properties;
 
     private PropertyReader() {
-        if (instance == null) {
-            instance = new PropertyReader();
-        }
-
         try {
             loadProperties();
         } catch (FileNotFoundException f) {
-            instance = null;
             ConsoleLogger.fatal("Properties file not found: " + propertyFilePath);
         } catch (Exception e) {
-            instance = null;
             ConsoleLogger.fatal("Error occured while creating Property Reader: ", e);
         }
     }
 
-    private void loadProperties() throws Exception{
-        InputStream is = new FileInputStream(new File(propertyFilePath));
-        properties = new Properties();
-        properties.load(is);
+    private static void loadProperties() throws Exception{
+        if (properties == null) {
+            InputStream is = new FileInputStream(new File(propertyFilePath));
+            properties = new Properties();
+            properties.load(is);
+        }
     }
 
-    private Properties getProperties() {
+    private static Properties getProperties() throws Exception{
+        loadProperties();
         return properties;
     }
 
     private static Collection<String> getPropertiesAsCollection(String propertyName, String delim) {
-        String fileTypesString = instance.getProperties().getProperty(propertyName);
-        return Arrays.asList(fileTypesString.split(delim));
+        try {
+            String fileTypesString = PropertyReader.getProperties().getProperty(propertyName);
+            return Arrays.asList(fileTypesString.split(delim));
+        } catch (Exception e) {
+            ConsoleLogger.fatal("Error while attempting to read properties file: ", e);
+            return null;
+        }
     }
 
     /* Getters for specific properties */

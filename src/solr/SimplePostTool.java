@@ -131,11 +131,12 @@ public class SimplePostTool {
   /** Post all filenames provided in args, return the number of files posted*/
   void postFiles(String [] args,int startIndexInArgs) throws Exception {
     DirectoryPoster poster = new DirectoryPoster();
+    FilePoster filePoster = new FilePoster();
     for (int j = startIndexInArgs; j < args.length; j++) {
 		if (isDirectory(args[0])) {
 			poster.postFiles(args[0]);
 		} else {
-			FilePoster.postFiles(args[j]);
+			filePoster.postFiles(args[j]);
 		}
       
     }

@@ -25,14 +25,15 @@ public class ConsoleLogger {
 
 	  public static void fatal(String msg, Exception e) {
           System.err.println("SimplePostTool: FATAL: " + msg);
-          System.err.println(getFormatedStackTrace(e.getStackTrace()));
+          System.err.println(getFormattedStackTrace(e));
           System.exit(1);
 	  }
 
-	  private static String getFormatedStackTrace(StackTraceElement[] st) {
+	  private static String getFormattedStackTrace(Exception e) {
 	      StringBuilder sb = new StringBuilder();
 	      String newLine = System.lineSeparator();
-	      for (StackTraceElement stackTraceElement : st) {
+	      sb.append(e.getMessage() + newLine);
+	      for (StackTraceElement stackTraceElement : e.getStackTrace()) {
 	          sb.append(stackTraceElement);
 	          sb.append(newLine);
           }
