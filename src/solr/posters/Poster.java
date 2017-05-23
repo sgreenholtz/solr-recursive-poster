@@ -5,5 +5,6 @@ package solr.posters;
  */
 public interface Poster {
 
+    void postFiles(String path);
 
 }
