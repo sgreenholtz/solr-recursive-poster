@@ -93,12 +93,14 @@ public class SimplePostTool {
         }
 
         try {
+            /* FILES */
             if (DATA_MODE_FILES.equals(mode)) {
                 if (0 < args.length) {
                     ConsoleLogger.info("POSTing files to " + u + "..");
                     t.postFiles(args,0);
                 }
-                
+
+            /* DATA */
             } else if (DATA_MODE_ARGS.equals(mode)) {
                 if (0 < args.length) {
                     ConsoleLogger.info("POSTing args to " + u + "..");
@@ -126,26 +128,13 @@ public class SimplePostTool {
             ConsoleLogger.fatal("Unexpected Exception " + ioe);
         }
     }
-    
-    private boolean isDirectory(String path) {
-	    return DirectoryPoster.isDirectory(path);
-    }
- 
-    /** Post all file names provided in args, return the number of files posted*/
-    void postFiles(String [] args,int startIndexInArgs) throws Exception {
-        DirectoryPoster poster = new DirectoryPoster();
-        FilePoster filePoster = new FilePoster();
+
+    void postFiles(String [] args, int startIndexInArgs) throws Exception {
+        DirectoryPoster directoryPoster = new DirectoryPoster(new FilePoster());
         for (int j = startIndexInArgs; j < args.length; j++) {
-		if (isDirectory(args[0])) {
-			poster.postFiles(args[0]);
-		} else {
-			filePoster.postFiles(args[j]);
-		}
-            
+            directoryPoster.postFiles(args[j]);
         }
     }
-    
-
 
     /**
      * Constructs an instance for posting data to the specified Solr URL 
@@ -163,10 +152,5 @@ public class SimplePostTool {
     public void commit(Writer output) throws IOException {
         DataPoster.postData(new StringReader("<commit/>"), output);
     }
-
-
-
-    
-
 
 }

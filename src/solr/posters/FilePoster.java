@@ -1,17 +1,8 @@
 package solr.posters;
 
 import solr.util.ConsoleLogger;
-import solr.util.PostException;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.Reader;
-import java.io.StringWriter;
-import java.io.UnsupportedEncodingException;
-import java.io.Writer;
+import java.io.*;
 
 public class FilePoster implements Poster {
 	private static final String SOLR_OK_RESPONSE_EXCERPT = "<int name=\"status\">0</int>";

@@ -16,20 +16,18 @@ import java.nio.file.Paths;
  */
 public class DirectoryPoster implements Poster {
 
-	private static Poster poster = new FilePoster();
-	
-	public static boolean isDirectory(String path) {
-		File pathToTest = new File(path);
-		return pathToTest.isDirectory();
-	}
+	private Poster poster;
+
+	public DirectoryPoster(Poster poster) {
+	    this.poster = poster;
+    }
 	
 	public void postFiles(String pathStr) {
-		int fileCount = 0;
 		Path path = Paths.get(pathStr);
 		try {
 			Files.walkFileTree(path, new Walker(poster));
 		} catch (IOException e) {
-			ConsoleLogger.fatal("Read/Write error while taversing file system", e);
+			ConsoleLogger.fatal("Read/Write error while traversing file system", e);
 		}
 
 	}
