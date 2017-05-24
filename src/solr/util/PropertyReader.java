@@ -9,6 +9,7 @@ import java.util.*;
 /**
  * Reads properties file and returns the values. Properties file must be on the
  * the classpath to be read correctly by the application
+ * TODO: These options should really be passed as arguments on the command line
  * @author Sebastian Greenholtz
  */
 public class PropertyReader {
@@ -22,7 +23,7 @@ public class PropertyReader {
         } catch (FileNotFoundException f) {
             ConsoleLogger.fatal("Properties file not found: " + propertyFilePath);
         } catch (Exception e) {
-            ConsoleLogger.fatal("Error occured while creating Property Reader: ", e);
+            ConsoleLogger.fatal("Error occurred while creating Property Reader: ", e);
         }
     }
 
