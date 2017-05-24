@@ -5,16 +5,13 @@ import solr.util.ConsoleLogger;
 import solr.util.PropertyReader;
 
 import java.io.IOException;
-import java.nio.file.FileVisitResult;
-import java.nio.file.FileVisitor;
-import java.nio.file.Files;
-import java.nio.file.Path;
+import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
 
 /**
  * @author Sebastian Greenholtz
  */
-public class Walker implements FileVisitor<Path> {
+public class Walker extends SimpleFileVisitor<Path> {
     private Poster poster;
 
     public Walker(Poster poster) {
@@ -26,9 +23,8 @@ public class Walker implements FileVisitor<Path> {
             throws IOException {
         if (PropertyReader.getIgnoredDirectories().contains(path.toString())) {
             return FileVisitResult.SKIP_SIBLINGS;
-        } else {
-            return FileVisitResult.CONTINUE;
         }
+        return FileVisitResult.CONTINUE;
     }
 
     @Override
@@ -43,7 +39,7 @@ public class Walker implements FileVisitor<Path> {
                 ConsoleLogger.fatal("Error while posting files to Solr: ", e);
             }
         }
-        return null;
+        return FileVisitResult.CONTINUE;
     }
 
     private void printSkippedInfoMessage(Path path) {
@@ -58,13 +54,6 @@ public class Walker implements FileVisitor<Path> {
     public FileVisitResult visitFileFailed(Path path, IOException e)
             throws IOException {
         ConsoleLogger.fatal("Error visiting file", e);
-        //TODO: print to error log? abort?
-        return null;
-    }
-
-    @Override
-    public FileVisitResult postVisitDirectory(Path path, IOException e)
-            throws IOException {
-        return null;
+        return FileVisitResult.TERMINATE;
     }
 }

@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
-import java.nio.file.Files;
 import java.util.*;
 
 /**
@@ -14,7 +13,7 @@ import java.util.*;
  */
 public class PropertyReader {
 
-    private final static String propertyFilePath = "post.properties";
+    private final static String propertyFilePath = "resources/post.properties";
     private static Properties properties;
 
     private PropertyReader() {
