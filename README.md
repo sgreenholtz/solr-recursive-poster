@@ -3,6 +3,8 @@ Expansion of the default post utility for [Solr 1.4](https://wiki.apache.org/sol
 posting through file system 
 
 ### Usage
+You can either build from source or use the jar in bin/jar.
+
 To use the Solr Recursive Poster, run the jar on the command line with the file(s) to 
 post as the first argument. To post recursively through a file tree, add the start point
 of the file walk as the first argument
